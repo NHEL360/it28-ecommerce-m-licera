@@ -37,6 +37,9 @@
             top: 10px;
             right: 10px;
         }
+        .payment-options {
+            display: none;
+        }
         #totalPrice {
             margin-top: 20px;
             font-size: 18px;
@@ -46,7 +49,11 @@
 </head>
 <body>
     <div class="top-right-buttons">
-        <button onclick="processPaymentAndAccounting()">Payment & Accounting</button>
+        <button onclick="togglePaymentOptions()">Payment & Accounting</button>
+        <div class="payment-options">
+            <button onclick="processPaymentAndAccounting('GCash')">GCash</button>
+            <button onclick="processPaymentAndAccounting('PayMaya')">PayMaya</button>
+        </div>
         <button onclick="processLogistic()">Logistic</button>
         <button onclick="openCustomerService()">Customer Service</button>
         <button onclick="openReport()">Report</button>
@@ -80,6 +87,7 @@
             <!-- Add more products here -->
         </tbody>
     </table>
+
     <h2>Cart</h2>
     <table id="cartTable">
         <thead>
@@ -137,28 +145,42 @@
             document.getElementById("totalPrice").textContent = "Total Price: $" + totalPrice.toFixed(2);
         }
 
-        function processPaymentAndAccounting() {
-            // Replace this with your payment and accounting functionality
-            alert("Processing Payment & Accounting...");
+        function togglePaymentOptions() {
+            var paymentOptions = document.querySelector('.payment-options');
+            if (paymentOptions.style.display === "none") {
+                paymentOptions.style.display = "block";
+            } else {
+                paymentOptions.style.display = "none";
+            }
+        }
+
+        function processPaymentAndAccounting(paymentMethod) {
+            // Implement payment and accounting logic here
+            alert("Processing " + paymentMethod + " Payment & Accounting...");
         }
 
         function processLogistic() {
-            // Replace this with your logistic functionality
+            // Implement logistic functionality
             alert("Processing Logistic...");
+            // Add track my order functionality
+            var orderTrackingLink = prompt("Enter the order tracking link:");
+            if (orderTrackingLink) {
+                alert("Tracking your order at: " + orderTrackingLink);
+            }
         }
 
         function openCustomerService() {
-            // Replace this with your customer service page URL or functionality
+            // Implement customer service functionality
             alert("Opening Customer Service...");
         }
 
         function openReport() {
-            // Replace this with your report page URL or functionality
+            // Implement report functionality
             alert("Opening Report...");
         }
 
         function buyItems() {
-            // Implement your purchase logic here
+            // Implement buy items functionality
             alert("Buying Items...");
 
             // Clear the cart and reset total price
@@ -172,3 +194,4 @@
     </script>
 </body>
 </html>
+
