@@ -80,3 +80,95 @@
             <!-- Add more products here -->
         </tbody>
     </table>
+    <h2>Cart</h2>
+    <table id="cartTable">
+        <thead>
+            <tr>
+                <th>Product Image</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody id="cartBody">
+            <!-- Cart items will be added here dynamically -->
+        </tbody>
+    </table>
+
+    <div id="totalPrice"></div>
+
+    <button onclick="buyItems()" style="margin-top: 20px;">Buy</button>
+
+    <script>
+        var totalPrice = 0;
+
+        function addToCart(name, price) {
+            var cartBody = document.getElementById("cartBody");
+            var newRow = document.createElement("tr");
+
+            var imgCell = document.createElement("td");
+            var img = document.createElement("img");
+            img.src = "https://via.placeholder.com/100"; // Sample image URL
+            img.alt = name;
+            img.className = "product-img";
+            imgCell.appendChild(img);
+            newRow.appendChild(imgCell);
+
+            var nameCell = document.createElement("td");
+            nameCell.textContent = name;
+            newRow.appendChild(nameCell);
+
+            var quantityCell = document.createElement("td");
+            quantityCell.textContent = 1;
+            newRow.appendChild(quantityCell);
+
+            var priceCell = document.createElement("td");
+            priceCell.textContent = "$" + price.toFixed(2);
+            newRow.appendChild(priceCell);
+
+            cartBody.appendChild(newRow);
+
+            // Update total price
+            totalPrice += price;
+            updateTotalPrice();
+        }
+
+        function updateTotalPrice() {
+            document.getElementById("totalPrice").textContent = "Total Price: $" + totalPrice.toFixed(2);
+        }
+
+        function processPaymentAndAccounting() {
+            // Replace this with your payment and accounting functionality
+            alert("Processing Payment & Accounting...");
+        }
+
+        function processLogistic() {
+            // Replace this with your logistic functionality
+            alert("Processing Logistic...");
+        }
+
+        function openCustomerService() {
+            // Replace this with your customer service page URL or functionality
+            alert("Opening Customer Service...");
+        }
+
+        function openReport() {
+            // Replace this with your report page URL or functionality
+            alert("Opening Report...");
+        }
+
+        function buyItems() {
+            // Implement your purchase logic here
+            alert("Buying Items...");
+
+            // Clear the cart and reset total price
+            var cartBody = document.getElementById("cartBody");
+            while (cartBody.firstChild) {
+                cartBody.removeChild(cartBody.firstChild);
+            }
+            totalPrice = 0;
+            updateTotalPrice();
+        }
+    </script>
+</body>
+</html>
