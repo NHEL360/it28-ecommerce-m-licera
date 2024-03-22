@@ -45,6 +45,12 @@
             font-size: 18px;
             font-weight: bold;
         }
+        .button-group {
+            margin-top: 20px;
+        }
+        .button-group button {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -105,7 +111,10 @@
 
     <div id="totalPrice"></div>
 
-    <button onclick="buyItems()" style="margin-top: 20px;">Buy</button>
+    <div class="button-group">
+        <button onclick="buyItems()">Buy</button>
+        <button onclick="cancelPurchase()">Cancel</button>
+    </div>
 
     <script>
         var totalPrice = 0;
@@ -191,7 +200,17 @@
             totalPrice = 0;
             updateTotalPrice();
         }
+
+        function cancelPurchase() {
+            alert("Purchase Cancelled.");
+            // Clear the cart and reset total price
+            var cartBody = document.getElementById("cartBody");
+            while (cartBody.firstChild) {
+                cartBody.removeChild(cartBody.firstChild);
+            }
+            totalPrice = 0;
+            updateTotalPrice();
+        }
     </script>
 </body>
 </html>
-
