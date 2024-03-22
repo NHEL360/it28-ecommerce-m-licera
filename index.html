@@ -51,6 +51,59 @@
         .button-group button {
             margin-right: 10px;
         }
+        .chat-box {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 30px;
+            width: 300px;
+            height: 400px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+        }
+        .chat-box-header {
+            background-color: #ccc;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-box-header h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+        .chat-box-body {
+            padding: 10px;
+            height: 320px;
+            overflow-y: scroll;
+        }
+        .chat-box-body p {
+            margin: 5px 0;
+        }
+        .chat-box-footer {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-box-footer input[type="text"] {
+            width: 70%;
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            margin-right: 5px;
+        }
+        .chat-box-footer button {
+            padding: 5px 10px;
+            border-radius: 3px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -116,6 +169,21 @@
         <button onclick="cancelPurchase()">Cancel</button>
     </div>
 
+    <div class="chat-box" id="chatBox">
+        <div class="chat-box-header" onclick="toggleChatBox()">
+            <h3>Customer Service Chat</h3>
+            <button onclick="contactSeller()">Contact Seller</button>
+        </div>
+        <div class="chat-box-body" id="chatBody">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        <div class="chat-box-footer">
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+            <button onclick="cancelChat()">Cancel</button>
+        </div>
+    </div>
+
     <script>
         var totalPrice = 0;
 
@@ -179,8 +247,12 @@
         }
 
         function openCustomerService() {
-            // Implement customer service functionality
-            alert("Opening Customer Service...");
+            var chatBox = document.getElementById("chatBox");
+            if (chatBox.style.display === "none") {
+                chatBox.style.display = "block";
+            } else {
+                chatBox.style.display = "none";
+            }
         }
 
         function openReport() {
@@ -211,6 +283,37 @@
             totalPrice = 0;
             updateTotalPrice();
         }
+
+        function toggleChatBox() {
+            var chatBox = document.getElementById("chatBox");
+            if (chatBox.style.display === "none") {
+                chatBox.style.display = "block";
+            } else {
+                chatBox.style.display = "none";
+            }
+        }
+
+        function sendMessage() {
+            var message = document.getElementById("chatInput").value.trim();
+            if (message !== "") {
+                var chatBody = document.getElementById("chatBody");
+                var messageElement = document.createElement("p");
+                messageElement.textContent = "You: " + message;
+                chatBody.appendChild(messageElement);
+                document.getElementById("chatInput").value = "";
+            }
+        }
+
+        function cancelChat() {
+            var chatBox = document.getElementById("chatBox");
+            chatBox.style.display = "none";
+        }
+
+        function contactSeller() {
+            // Add your logic to contact the seller here
+            alert("Contacting Seller...");
+        }
     </script>
 </body>
 </html>
+
