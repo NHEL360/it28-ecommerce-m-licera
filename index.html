@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shoppe - Inventory Management</title>
+    <title>Product Inventory</title>
     <style>
         table {
             border-collapse: collapse;
@@ -118,34 +118,24 @@
         <button onclick="openReport()">Report</button>
     </div>
 
-    <h1>Shoppe - Inventory Management</h1>
+    <h1>Product Inventory</h1>
 
     <h2>Products</h2>
-    <table id="productsTable">
-        <thead>
-            <tr>
-                <th>Product Image</th>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="productsBody">
-            <tr>
-                <td><img src="https://via.placeholder.com/100" alt="Product 1" class="product-img"></td>
-                <td>Product 1</td>
-                <td>$10</td>
-                <td><button class="add-to-cart-btn" onclick="addToCart('Product 1', 10)">Add to Cart</button></td>
-            </tr>
-            <tr>
-                <td><img src="https://via.placeholder.com/100" alt="Product 2" class="product-img"></td>
-                <td>Product 2</td>
-                <td>$15</td>
-                <td><button class="add-to-cart-btn" onclick="addToCart('Product 2', 15)">Add to Cart</button></td>
-            </tr>
-            <!-- Add more products here -->
-        </tbody>
-    </table>
+    <div class="product-container">
+        <div class="product-item">
+            <img src="https://images.samsung.com/is/image/samsung/assets/levant/2401/pfs/Visual_LNB_Galaxy-S_pc.png?$N_96_PNG$" alt="Product 1" class="product-img">
+            <div>Galaxy-S</div>
+            <div>$10</div>
+            <button class="add-to-cart-btn" onclick="addToCart('Galaxy-S', 10)">Add to Cart</button>
+        </div>
+        <div class="product-item">
+            <img src="https://images.samsung.com/is/image/samsung/p6pim/levant/2401/gallery/levant-galaxy-s24-s928-sm-s928bzycmea-thumb-539426278?$172_172_PNG$" alt="Product 2" class="product-img">
+            <div>Galaxy S24 Ultra</div>
+            <div>$15</div>
+            <button class="add-to-cart-btn" onclick="addToCart('Galaxy S24 Ultra', 15)">Add to Cart</button>
+        </div>
+        <!-- Add more product items here -->
+    </div>
 
     <h2>Cart</h2>
     <table id="cartTable">
@@ -193,7 +183,8 @@
 
             var imgCell = document.createElement("td");
             var img = document.createElement("img");
-            img.src = "https://via.placeholder.com/100"; // Sample image URL
+            img.src = name === 'Galaxy-S' ? "https://images.samsung.com/is/image/samsung/assets/levant/2401/pfs/Visual_LNB_Galaxy-S_pc.png?$N_96_PNG$" :
+                "https://images.samsung.com/is/image/samsung/p6pim/levant/2401/gallery/levant-galaxy-s24-s928-sm-s928bzycmea-thumb-539426278?$172_172_PNG$"; // Sample image URL
             img.alt = name;
             img.className = "product-img";
             imgCell.appendChild(img);
