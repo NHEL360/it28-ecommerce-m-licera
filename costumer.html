@@ -1,0 +1,49 @@
+<div class="top-right-buttons">
+    <!-- Existing buttons -->
+    <a href="logistic.html">Logistic</a>
+</div>
+<div class="top-right-buttons">
+    <a href="payment.html">Payment</a>
+    <!-- Existing buttons -->
+</div>
+<div class="top-right-buttons">
+    <button onclick="openCustomerService()">Customer Service</button>
+    <button onclick="openReport()">Report</button>
+</div>
+
+<script>
+    function openCustomerService() {
+        var chatBox = document.getElementById("chatBox");
+        if (chatBox.style.display === "none") {
+            chatBox.style.display = "block";
+        } else {
+            chatBox.style.display = "none";
+        }
+    }
+
+    function openReport() {
+        // Implement report functionality
+        alert("Opening Report...");
+    }
+
+    function sendMessage() {
+        var message = document.getElementById("chatInput").value.trim();
+        if (message !== "") {
+            var chatBody = document.getElementById("chatBody");
+            var messageElement = document.createElement("p");
+            messageElement.textContent = "You: " + message;
+            chatBody.appendChild(messageElement);
+            document.getElementById("chatInput").value = "";
+        }
+    }
+
+    function cancelChat() {
+        var chatBox = document.getElementById("chatBox");
+        chatBox.style.display = "none";
+    }
+
+    function contactSeller() {
+        // Add your logic to contact the seller here
+        alert("Contacting Seller...");
+    }
+</script>
