@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistic</title>
+</head>
+<body>
+    <div class="top-right-buttons">
+        <button onclick="processLogistic()">Logistic</button>
+    </div>
+
+    <script>
+        function processLogistic() {
+            var orderTrackingLink = prompt("Enter the order tracking link:");
+            if (orderTrackingLink) {
+                // Make a POST request to the server to process logistic
+                fetch('/process-logistic', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ orderTrackingLink: orderTrackingLink })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('Failed to process logistic');
+                    }
+                })
+                .then(data => {
+                    alert(data); // Alert the response from the server
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("An error occurred while processing logistic.");
+                });
+            }
+        }
+    </script>
+</body>
+</html>

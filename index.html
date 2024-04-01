@@ -107,13 +107,20 @@
     </style>
 </head>
 <body>
+    <div>
+        <a href="logistic.html">Logistic</a>
+    </div>
+    <div class="top-right-buttons">
+        <!-- Existing buttons -->
+        <a href="logistic.html">Logistic</a>
+        <!-- Existing buttons -->
+    </div>
     <div class="top-right-buttons">
         <button onclick="togglePaymentOptions()">Payment & Accounting</button>
         <div class="payment-options">
             <button onclick="processPaymentAndAccounting('GCash')">GCash</button>
             <button onclick="processPaymentAndAccounting('PayMaya')">PayMaya</button>
         </div>
-        <button onclick="processLogistic()">Logistic</button>
         <button onclick="openCustomerService()">Customer Service</button>
         <button onclick="openReport()">Report</button>
     </div>
@@ -227,16 +234,6 @@
             alert("Processing " + paymentMethod + " Payment & Accounting...");
         }
 
-        function processLogistic() {
-            // Implement logistic functionality
-            alert("Processing Logistic...");
-            // Add track my order functionality
-            var orderTrackingLink = prompt("Enter the order tracking link:");
-            if (orderTrackingLink) {
-                alert("Tracking your order at: " + orderTrackingLink);
-            }
-        }
-
         function openCustomerService() {
             var chatBox = document.getElementById("chatBox");
             if (chatBox.style.display === "none") {
@@ -307,4 +304,3 @@
     </script>
 </body>
 </html>
-
