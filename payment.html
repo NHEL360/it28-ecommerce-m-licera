@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inventory</title>
+    <style>
+        /* Your existing CSS styles */
+        .top-right-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Your existing HTML content -->
+
+    <div class="top-right-buttons">
+        <a href="logistic.html">Logistic</a>
+        <button onclick="togglePaymentOptions()">Payment</button>
+        <div class="payment-options">
+            <button onclick="processPayment('GCash')">GCash</button>
+            <button onclick="processPayment('PayMaya')">PayMaya</button>
+        </div>
+        <button onclick="openAccounting()">Accounting</button>
+        <button onclick="openCustomerService()">Customer Service</button>
+        <button onclick="openReport()">Report</button>
+    </div>
+
+    <!-- Your existing HTML content -->
+
+    <script>
+        function togglePaymentOptions() {
+            var paymentOptions = document.querySelector('.payment-options');
+            if (paymentOptions.style.display === "none") {
+                paymentOptions.style.display = "block";
+            } else {
+                paymentOptions.style.display = "none";
+            }
+        }
+
+        function processPayment(paymentMethod) {
+            // Implement payment logic here
+            alert("Processing " + paymentMethod + " Payment...");
+        }
+
+        function openAccounting() {
+            // Implement accounting functionality
+            alert("Opening Accounting...");
+        }
+
+        function openCustomerService() {
+            // Implement customer service functionality
+            alert("Opening Customer Service...");
+        }
+
+        function openReport() {
+            // Implement report functionality
+            alert("Opening Report...");
+        }
+    </script>
+</body>
+</html>

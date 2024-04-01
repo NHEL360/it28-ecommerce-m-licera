@@ -1,306 +1,177 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Inventory</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .add-to-cart-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 8px 16px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-        .product-img {
-            max-width: 100px;
-            max-height: 100px;
-        }
-        .top-right-buttons {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .payment-options {
-            display: none;
-        }
-        #totalPrice {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .button-group {
-            margin-top: 20px;
-        }
-        .button-group button {
-            margin-right: 10px;
-        }
-        .chat-box {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            right: 30px;
-            width: 300px;
-            height: 400px;
-            background-color: #f4f4f4;
-            border: 1px solid #ccc;
-            border-radius: 5px 5px 0 0;
-            overflow: hidden;
-        }
-        .chat-box-header {
-            background-color: #ccc;
-            padding: 10px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .chat-box-header h3 {
-            margin: 0;
-            font-size: 16px;
-        }
-        .chat-box-body {
-            padding: 10px;
-            height: 320px;
-            overflow-y: scroll;
-        }
-        .chat-box-body p {
-            margin: 5px 0;
-        }
-        .chat-box-footer {
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .chat-box-footer input[type="text"] {
-            width: 70%;
-            padding: 5px;
-            border-radius: 3px;
-            border: 1px solid #ccc;
-            margin-right: 5px;
-        }
-        .chat-box-footer button {
-            padding: 5px 10px;
-            border-radius: 3px;
-            border: none;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div>
-        <a href="logistic.html">Logistic</a>
+
+<div class="top-right-buttons">
+    <!-- Existing buttons -->
+    <a href="logistic.html">Logistic</a>
+</div>
+<div class="top-right-buttons"></div>
+    <a href="payment.html">Payment</a>
+    <!-- Existing buttons -->
+</div>
+<div class="top-right-buttons">
+    <button onclick="openCustomerService()">Customer Service</button>
+    <button onclick="openReport()">Report</button>
+</div>
+
+<h1>Product Inventory</h1>
+
+<h2>Products</h2>
+<div class="product-container">
+    <div class="product-item">
+        <img src="https://images.samsung.com/is/image/samsung/assets/levant/2401/pfs/Visual_LNB_Galaxy-S_pc.png?$N_96_PNG$" alt="Product 1" class="product-img">
+        <div>Galaxy-S</div>
+        <div>$10</div>
+        <button class="add-to-cart-btn" onclick="addToCart('Galaxy-S', 10)">Add to Cart</button>
     </div>
-    <div class="top-right-buttons">
-        <!-- Existing buttons -->
-        <a href="logistic.html">Logistic</a>
-        <!-- Existing buttons -->
+    <div class="product-item">
+        <img src="https://images.samsung.com/is/image/samsung/p6pim/levant/2401/gallery/levant-galaxy-s24-s928-sm-s928bzycmea-thumb-539426278?$172_172_PNG$" alt="Product 2" class="product-img">
+        <div>Galaxy S24 Ultra</div>
+        <div>$15</div>
+        <button class="add-to-cart-btn" onclick="addToCart('Galaxy S24 Ultra', 15)">Add to Cart</button>
     </div>
-    <div class="top-right-buttons">
-        <button onclick="togglePaymentOptions()">Payment & Accounting</button>
-        <div class="payment-options">
-            <button onclick="processPaymentAndAccounting('GCash')">GCash</button>
-            <button onclick="processPaymentAndAccounting('PayMaya')">PayMaya</button>
-        </div>
-        <button onclick="openCustomerService()">Customer Service</button>
-        <button onclick="openReport()">Report</button>
+    <!-- Add more product items here -->
+</div>
+
+<h2>Cart</h2>
+<table id="cartTable">
+    <thead>
+        <tr>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody id="cartBody">
+        <!-- Cart items will be added here dynamically -->
+    </tbody>
+</table>
+
+<div id="totalPrice"></div>
+
+<div class="button-group">
+    <button onclick="buyItems()">Buy</button>
+    <button onclick="cancelPurchase()">Cancel</button>
+</div>
+
+<div class="chat-box" id="chatBox">
+    <div class="chat-box-header" onclick="toggleChatBox()">
+        <h3>Customer Service Chat</h3>
+        <button onclick="contactSeller()">Contact Seller</button>
     </div>
-
-    <h1>Product Inventory</h1>
-
-    <h2>Products</h2>
-    <div class="product-container">
-        <div class="product-item">
-            <img src="https://images.samsung.com/is/image/samsung/assets/levant/2401/pfs/Visual_LNB_Galaxy-S_pc.png?$N_96_PNG$" alt="Product 1" class="product-img">
-            <div>Galaxy-S</div>
-            <div>$10</div>
-            <button class="add-to-cart-btn" onclick="addToCart('Galaxy-S', 10)">Add to Cart</button>
-        </div>
-        <div class="product-item">
-            <img src="https://images.samsung.com/is/image/samsung/p6pim/levant/2401/gallery/levant-galaxy-s24-s928-sm-s928bzycmea-thumb-539426278?$172_172_PNG$" alt="Product 2" class="product-img">
-            <div>Galaxy S24 Ultra</div>
-            <div>$15</div>
-            <button class="add-to-cart-btn" onclick="addToCart('Galaxy S24 Ultra', 15)">Add to Cart</button>
-        </div>
-        <!-- Add more product items here -->
+    <div class="chat-box-body" id="chatBody">
+        <!-- Chat messages will be displayed here -->
     </div>
-
-    <h2>Cart</h2>
-    <table id="cartTable">
-        <thead>
-            <tr>
-                <th>Product Image</th>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody id="cartBody">
-            <!-- Cart items will be added here dynamically -->
-        </tbody>
-    </table>
-
-    <div id="totalPrice"></div>
-
-    <div class="button-group">
-        <button onclick="buyItems()">Buy</button>
-        <button onclick="cancelPurchase()">Cancel</button>
+    <div class="chat-box-footer">
+        <input type="text" id="chatInput" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+        <button onclick="cancelChat()">Cancel</button>
     </div>
+</div>
 
-    <div class="chat-box" id="chatBox">
-        <div class="chat-box-header" onclick="toggleChatBox()">
-            <h3>Customer Service Chat</h3>
-            <button onclick="contactSeller()">Contact Seller</button>
-        </div>
-        <div class="chat-box-body" id="chatBody">
-            <!-- Chat messages will be displayed here -->
-        </div>
-        <div class="chat-box-footer">
-            <input type="text" id="chatInput" placeholder="Type your message...">
-            <button onclick="sendMessage()">Send</button>
-            <button onclick="cancelChat()">Cancel</button>
-        </div>
-    </div>
+<script>
+    var totalPrice = 0;
 
-    <script>
-        var totalPrice = 0;
+    function addToCart(name, price) {
+        var cartBody = document.getElementById("cartBody");
+        var newRow = document.createElement("tr");
 
-        function addToCart(name, price) {
-            var cartBody = document.getElementById("cartBody");
-            var newRow = document.createElement("tr");
+        var imgCell = document.createElement("td");
+        var img = document.createElement("img");
+        img.src = name === 'Galaxy-S' ? "https://images.samsung.com/is/image/samsung/assets/levant/2401/pfs/Visual_LNB_Galaxy-S_pc.png?$N_96_PNG$" :
+            "https://images.samsung.com/is/image/samsung/p6pim/levant/2401/gallery/levant-galaxy-s24-s928-sm-s928bzycmea-thumb-539426278?$172_172_PNG$"; // Sample image URL
+        img.alt = name;
+        img.className = "product-img";
+        imgCell.appendChild(img);
+        newRow.appendChild(imgCell);
 
-            var imgCell = document.createElement("td");
-            var img = document.createElement("img");
-            img.src = name === 'Galaxy-S' ? "https://images.samsung.com/is/image/samsung/assets/levant/2401/pfs/Visual_LNB_Galaxy-S_pc.png?$N_96_PNG$" :
-                "https://images.samsung.com/is/image/samsung/p6pim/levant/2401/gallery/levant-galaxy-s24-s928-sm-s928bzycmea-thumb-539426278?$172_172_PNG$"; // Sample image URL
-            img.alt = name;
-            img.className = "product-img";
-            imgCell.appendChild(img);
-            newRow.appendChild(imgCell);
+        var nameCell = document.createElement("td");
+        nameCell.textContent = name;
+        newRow.appendChild(nameCell);
 
-            var nameCell = document.createElement("td");
-            nameCell.textContent = name;
-            newRow.appendChild(nameCell);
+        var quantityCell = document.createElement("td");
+        quantityCell.textContent = 1;
+        newRow.appendChild(quantityCell);
 
-            var quantityCell = document.createElement("td");
-            quantityCell.textContent = 1;
-            newRow.appendChild(quantityCell);
+        var priceCell = document.createElement("td");
+        priceCell.textContent = "$" + price.toFixed(2);
+        newRow.appendChild(priceCell);
 
-            var priceCell = document.createElement("td");
-            priceCell.textContent = "$" + price.toFixed(2);
-            newRow.appendChild(priceCell);
+        cartBody.appendChild(newRow);
 
-            cartBody.appendChild(newRow);
+        // Update total price
+        totalPrice += price;
+        updateTotalPrice();
+    }
 
-            // Update total price
-            totalPrice += price;
-            updateTotalPrice();
-        }
+    function updateTotalPrice() {
+        document.getElementById("totalPrice").textContent = "Total Price: $" + totalPrice.toFixed(2);
+    }
 
-        function updateTotalPrice() {
-            document.getElementById("totalPrice").textContent = "Total Price: $" + totalPrice.toFixed(2);
-        }
-
-        function togglePaymentOptions() {
-            var paymentOptions = document.querySelector('.payment-options');
-            if (paymentOptions.style.display === "none") {
-                paymentOptions.style.display = "block";
-            } else {
-                paymentOptions.style.display = "none";
-            }
-        }
-
-        function processPaymentAndAccounting(paymentMethod) {
-            // Implement payment and accounting logic here
-            alert("Processing " + paymentMethod + " Payment & Accounting...");
-        }
-
-        function openCustomerService() {
-            var chatBox = document.getElementById("chatBox");
-            if (chatBox.style.display === "none") {
-                chatBox.style.display = "block";
-            } else {
-                chatBox.style.display = "none";
-            }
-        }
-
-        function openReport() {
-            // Implement report functionality
-            alert("Opening Report...");
-        }
-
-        function buyItems() {
-            // Implement buy items functionality
-            alert("Buying Items...");
-
-            // Clear the cart and reset total price
-            var cartBody = document.getElementById("cartBody");
-            while (cartBody.firstChild) {
-                cartBody.removeChild(cartBody.firstChild);
-            }
-            totalPrice = 0;
-            updateTotalPrice();
-        }
-
-        function cancelPurchase() {
-            alert("Purchase Cancelled.");
-            // Clear the cart and reset total price
-            var cartBody = document.getElementById("cartBody");
-            while (cartBody.firstChild) {
-                cartBody.removeChild(cartBody.firstChild);
-            }
-            totalPrice = 0;
-            updateTotalPrice();
-        }
-
-        function toggleChatBox() {
-            var chatBox = document.getElementById("chatBox");
-            if (chatBox.style.display === "none") {
-                chatBox.style.display = "block";
-            } else {
-                chatBox.style.display = "none";
-            }
-        }
-
-        function sendMessage() {
-            var message = document.getElementById("chatInput").value.trim();
-            if (message !== "") {
-                var chatBody = document.getElementById("chatBody");
-                var messageElement = document.createElement("p");
-                messageElement.textContent = "You: " + message;
-                chatBody.appendChild(messageElement);
-                document.getElementById("chatInput").value = "";
-            }
-        }
-
-        function cancelChat() {
-            var chatBox = document.getElementById("chatBox");
+    function openCustomerService() {
+        var chatBox = document.getElementById("chatBox");
+        if (chatBox.style.display === "none") {
+            chatBox.style.display = "block";
+        } else {
             chatBox.style.display = "none";
         }
+    }
 
-        function contactSeller() {
-            // Add your logic to contact the seller here
-            alert("Contacting Seller...");
+    function openReport() {
+        // Implement report functionality
+        alert("Opening Report...");
+    }
+
+    function buyItems() {
+        // Implement buy items functionality
+        alert("Buying Items...");
+
+        // Clear the cart and reset total price
+        var cartBody = document.getElementById("cartBody");
+        while (cartBody.firstChild) {
+            cartBody.removeChild(cartBody.firstChild);
         }
-    </script>
-</body>
-</html>
+        totalPrice = 0;
+        updateTotalPrice();
+    }
+
+    function cancelPurchase() {
+        alert("Purchase Cancelled.");
+        // Clear the cart and reset total price
+        var cartBody = document.getElementById("cartBody");
+        while (cartBody.firstChild) {
+            cartBody.removeChild(cartBody.firstChild);
+        }
+        totalPrice = 0;
+        updateTotalPrice();
+    }
+
+    function toggleChatBox() {
+        var chatBox = document.getElementById("chatBox");
+        if (chatBox.style.display === "none") {
+            chatBox.style.display = "block";
+        } else {
+            chatBox.style.display = "none";
+        }
+    }
+
+    function sendMessage() {
+        var message = document.getElementById("chatInput").value.trim();
+        if (message !== "") {
+            var chatBody = document.getElementById("chatBody");
+            var messageElement = document.createElement("p");
+            messageElement.textContent = "You: " + message;
+            chatBody.appendChild(messageElement);
+            document.getElementById("chatInput").value = "";
+        }
+    }
+
+    function cancelChat() {
+        var chatBox = document.getElementById("chatBox");
+        chatBox.style.display = "none";
+    }
+
+    function contactSeller() {
+        // Add your logic to contact the seller here
+        alert("Contacting Seller...");
+    }
+</script>
